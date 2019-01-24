@@ -1,0 +1,4 @@
+blog_add:
+    path:      /
+    defaults:
+        _controller: BlogBundle:News:add
