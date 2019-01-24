@@ -1,4 +1,18 @@
 blog_add:
-    path:      /
+    path:      /add
     defaults:
         _controller: BlogBundle:News:add
+
+blog_view:
+    path:      /view{id}
+    defaults:
+        _controller: BlogBundle:News:view
+
+blog_delete:
+    path:      /delete{id}
+    defaults:
+        _controller: BlogBundle:News:delete
+
+# dans /var/www/html/blogsymf1/app/config/routing.yml nous avons ceci
+# blog_root:
+#    resource: "@BlogBundle/Resources/config/routing.yml"

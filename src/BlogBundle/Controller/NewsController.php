@@ -5,6 +5,9 @@ namespace BlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use OC\PlatformBundle\Services\MessageGenerator;
+
 use BlogBundle\Entity\News;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -14,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ImageType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class NewsController extends Controller
 {
@@ -40,6 +44,21 @@ class NewsController extends Controller
       'title'=>$news->getTitle(),
       'alt'=>$news->getAlt(),
     )
+    );
+    }
+
+
+
+    public function deleteAction(Request $request, $id) {
+      $em = $this->getDoctrine()->getManager();
+      $news = $em->getRepository('BlogBundle:News')->find($id);
+      if (null === $news) {
+        throw new NotFoundHttpException("L'info N° ".$id." n'existe pas");
+      }
+            $deleted_title = $news->getTitle();
+    $em->remove($news);
+    $em->flush();
+      return $this->render('@Blog/Default/deleted.html.twig', array('titre'=>'monblog', 'iddeleted'=>$id)
     );
     }
 

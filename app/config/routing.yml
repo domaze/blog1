@@ -1,15 +1,2 @@
 blog:
     resource: "@BlogBundle/Resources/config/routing.yml"
-    type:     annotation
-    prefix:   /
-
-
-blog_add:
-    path:      /add
-    defaults:
-        _controller: BlogBundle:News:add
-
-blog_view:
-    path:      /view{id}
-    defaults:
-        _controller: BlogBundle:News:view
