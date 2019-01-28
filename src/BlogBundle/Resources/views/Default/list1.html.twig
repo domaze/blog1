@@ -1,0 +1,29 @@
+
+{% extends "@Blog/layout.html.twig" %}
+
+
+{% block body%}
+
+<div class="bodyContainer1">
+
+
+<h1>Members</h1>
+<ul>
+    {% for new in news %}
+        <li>{{ new.id|e }}</li>
+
+                <h2>Article N° {{ new.id  }}</h2>
+                <h1>Title : {{ new.title }}</h1>
+                <p class="contenu">Content: {{ new.content  }} </p>
+                    <p>
+                        Alt : <span class="details">{{ new.alt }}</span>
+                    </p> 
+                </div>
+
+
+    {% endfor %}
+</ul>
+
+
+
+{% endblock %}

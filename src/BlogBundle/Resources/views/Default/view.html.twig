@@ -1,14 +1,19 @@
+
 {% extends "@Blog/layout.html.twig" %}
 
 
 {% block body%}
 
-  <h1>{{ titre }}</h1>
-  <div class="">
+<div class="bodyContainer1">
 
-{{ content  }}
+<h2>Article N° {{ id  }}</h2>
+<h1>Titre : {{ title }}</h1>
+<p class="contenu">Content: {{ content  }} </p>
 
-<h2>{{ title  }}</h2>
+<p>
+Alt : <span class="details">{{ alt }}</span>
+</p> 
+</div>
 
-  </div>
+
 {% endblock %}

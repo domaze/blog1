@@ -8,10 +8,31 @@ blog_view:
     defaults:
         _controller: BlogBundle:News:view
 
-blog_delete:
-    path:      /delete{id}
+blog_del:
+    path:      /del{id}
     defaults:
         _controller: BlogBundle:News:delete
+
+blog_index:
+    path:      /
+    defaults:
+        _controller: BlogBundle:News:index          
+
+blog_list1:
+    path:      /ff
+    defaults:
+        _controller: BlogBundle:News:list1       
+
+blog_list2:
+    path:      /index1
+    defaults:
+        _controller: BlogBundle:News:list1
+
+blog_list3:
+    path:      /index2
+    defaults:
+        _controller: BlogBundle:News:list1        
+     
 
 # dans /var/www/html/blogsymf1/app/config/routing.yml nous avons ceci
 # blog_root:

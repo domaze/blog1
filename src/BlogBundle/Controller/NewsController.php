@@ -21,14 +21,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class NewsController extends Controller
 {
-    /**
-     * @Route("/")
-     */
-    public function indexAction(Request $request)
+ 
+    public function indexAction()
     {
-      $titre ='mon blog';
-      return $this->render('@Blog/Default/index.html.twig', array('titre'=>$titre));
+      $title ='mon blog';
+      return $this->render('@Blog/Default/index.html.twig', array('title1'=>$title) );
     }
+
 
     public function viewAction($id)
     {
@@ -38,12 +37,26 @@ class NewsController extends Controller
       $news = $em->getRepository('BlogBundle:News')->find($id);
 
 
-      return $this->render('@Blog/Default/view.html.twig', array('titre'=>$titre,
-      'id'=>$id,
-      'content'=>$news->getContent(),
-      'title'=>$news->getTitle(),
-      'alt'=>$news->getAlt(),
-    )
+      return $this->render('@Blog/Default/view.html.twig', array(
+                        'title'=>$news->getTitle(),
+                        'id'=>$id,
+                        'content'=>$news->getContent(),
+                        'title'=>$news->getTitle(),
+                        'alt'=>$news->getAlt(),
+                      )
+                      );
+    }
+
+
+    public function list1Action()
+    {
+      $titre ='mon blog';
+      $em = $this->getDoctrine()->getManager();
+      // Pour récupérer une seule annonce, on utilise la méthode find($id)
+      $news = $em->getRepository('BlogBundle:News')->findAll();
+
+
+      return $this->render('@Blog/Default/list1.html.twig', array('news'=> $news)
     );
     }
 
@@ -85,18 +98,18 @@ public function addAction(Request $request)
         {
           $form->handleRequest($request);
               if ($form->isValid()) {
-                      if( (!isset($news->alt)) || (empty($news->alt)) ){$news->setAlt('à renseigner'); }
-                      $news->setImage('à renseigner');
-                  //    if( (!isset($news->published)) || (empty($news->published)) ){ $news->setPublished(1); }
+                if( (!isset($news->alt)) || (empty($news->alt)) ){$news->setAlt('à renseigner'); }
+                $news->setImage('à renseigner');
+                //    if( (!isset($news->published)) || (empty($news->published)) ){ $news->setPublished(1); }
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($news);
                 $em->flush();
                 return $this->redirectToRoute('blog_view',
                 ['id' => $news->getId()]);
               }
-          }
-    $titre ='mon blog';
-    return $this->render('@Blog/Default/index.html.twig', array('titre'=>$titre, 'form'=>$form->createView(),));
-    }
+        }
+    $title ='mon blog';
+    return $this->render('@Blog/Default/add.html.twig', array('titre'=>$title, 'form'=>$form->createView(),));
+  }
 
 }

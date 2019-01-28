@@ -1,5 +1,6 @@
 {% extends "@Blog/layout.html.twig" %}
 
+
 {% block body %}
 
 
@@ -7,12 +8,18 @@
    
 <p>
 
+
 {# <a href="{{ path('blog_add',{'tri':'datePesee', 'order':'asc'}) }}">Ajouter</a> #}
 
-{{ app.request.attributes.get('_route') }}
+<a href="{{ path('blog_add') }}">Ajouter</a>
+<a href="{{ path('blog_list1') }}">Lister</a>
+
+
+{{ form(form) }}
 
 </p>
 
   </div>
+
 
 {% endblock %}
